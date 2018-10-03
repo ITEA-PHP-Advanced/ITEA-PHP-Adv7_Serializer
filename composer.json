@@ -1,0 +1,29 @@
+{
+    "name": "greeflas/serializer",
+    "description": "This is simple library for objects serialization to needed format.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vladimir Kuprienko",
+            "email": "vldmr.kuprienko@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=7.3",
+        "ext-json": "*",
+        "ext-simplexml": "*",
+        "symfony/yaml": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Greeflas\\Serializer\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Greeflas\\Serializer\\Tests\\": "tests/"
+        }
+    }
+}

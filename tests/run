@@ -1,0 +1,23 @@
+#!/usr/bin/env php
+<?php
+
+use Greeflas\Serializer\Exception\InvalidFormatException;
+use Greeflas\Serializer\Factory;
+use Greeflas\Serializer\Tests\Fixtures\InvalidSample;
+use Greeflas\Serializer\Tests\Fixtures\Sample;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+$factory = new Factory();
+$sample = new Sample('this is test', ['a' => 10, 'b' => 11]);
+
+\printf("[JSON]\n%s\n\n", $factory->createJsonSerializer()->serialize($sample));
+\printf("[Yaml]\n%s\n\n", $factory->createYamlSerializer()->serialize($sample));
+\printf("[XML]\n%s\n\n", $factory->createXmlSerializer()->serialize($sample));
+\printf("[XML]\n%s\n\n", $factory->createXmlSerializer('main')->serialize($sample));
+
+try {
+    $factory->createJsonSerializer()->serialize(new InvalidSample());
+} catch (InvalidFormatException $e) {
+    echo \sprintf("[ERROR] %s\n", $e->getMessage());
+}
