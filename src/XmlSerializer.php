@@ -1,39 +1,35 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Greeflas\Serializer;
 
-class XmlSerializer extends AbstractSerializer
+class XmlSerializer implements SerializerInterface
 {
-    /** @var string */
-    private $rootNode;
+    private string $rootNode;
 
-    /**
-     * Constructor.
-     *
-     * @param string $rootNodeName
-     */
-    public function __construct($rootNodeName = 'root')
+    public function __construct(string $rootNodeName = 'root')
     {
         $this->rootNode = \sprintf('<%s/>', $rootNodeName);
     }
 
-    protected function encode($data)
+    public function serialize(Serializable $object): string
     {
         $xml = new \SimpleXMLElement($this->rootNode);
 
-        $this->arrayToXmlRecursive($data, $xml);
+        $this->arrayToXmlRecursive($object->serialize(), $xml);
 
         return $xml->asXML();
     }
 
-    private function arrayToXmlRecursive($array, \SimpleXMLElement &$node)
+    private function arrayToXmlRecursive(array $array, \SimpleXMLElement &$node): void
     {
         foreach ($array as $key => $value) {
             if (\is_array($value)) {
                 $parentNode = $node->addChild($key);
                 $this->arrayToXmlRecursive($value, $parentNode);
             } else {
-                $node->addChild($key, $value);
+                $node->addChild($key, (string) $value);
             }
         }
     }

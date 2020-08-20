@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Greeflas\Serializer;
 
 use Symfony\Component\Yaml\Yaml;
 
-class YamlSerializer extends AbstractSerializer
+class YamlSerializer implements SerializerInterface
 {
-    public function encode($data)
+    public function serialize(Serializable $object): string
     {
-        return Yaml::dump($data);
+        return Yaml::dump($object->serialize());
     }
 }

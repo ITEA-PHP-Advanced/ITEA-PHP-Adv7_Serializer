@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Greeflas\Serializer\Tests\Fixtures;
 
 use Greeflas\Serializer\Serializable;
@@ -15,7 +17,7 @@ class Sample implements Serializable
         $this->secondField = $secondField;
     }
 
-    public function serialize()
+    public function serialize(): array
     {
         return [
             'first' => $this->firstField,

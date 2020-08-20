@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Greeflas\Serializer;
 
 /**
@@ -17,5 +19,5 @@ interface SerializerInterface
      * @param Serializable $object Object to serialize.
      * @return string
      */
-    public function serialize(Serializable $object);
+    public function serialize(Serializable $object): string;
 }
