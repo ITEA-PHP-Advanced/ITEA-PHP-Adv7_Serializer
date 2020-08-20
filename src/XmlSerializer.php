@@ -4,8 +4,14 @@ namespace Greeflas\Serializer;
 
 class XmlSerializer extends AbstractSerializer
 {
+    /** @var string */
     private $rootNode;
 
+    /**
+     * Constructor.
+     *
+     * @param string $rootNodeName
+     */
     public function __construct($rootNodeName = 'root')
     {
         $this->rootNode = \sprintf('<%s/>', $rootNodeName);
